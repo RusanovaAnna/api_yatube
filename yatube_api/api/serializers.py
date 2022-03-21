@@ -1,4 +1,3 @@
-from posts.models import User
 from rest_framework import serializers
 from posts.models import Post, Group, Comment
 
@@ -13,12 +12,18 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = "__all__"
         read_only_fields = ("post",)
 
+
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.SlugRelatedField(slug_field='username', read_only=True)
+    author = serializers.SlugRelatedField(
+        slug_field='username', read_only=True
+    )
 
     class Meta:
-        fields = ('id', 'text', 'author', 'image', 'pub_date', 'group', 'comments')
+        fields = (
+            'id', 'text', 'author', 'image', 'pub_date', 'group', 'comments'
+        )
         model = Post
+
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
